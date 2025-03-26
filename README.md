@@ -31,6 +31,9 @@ This repository contains a **Gradient Boosting Machine Learning model** that pre
 - `scikit-learn`
 - `matplotlib`
 
+## File Structure 
+- For every race the end of the file will be numbered in correlation to the race on the calendar, ex. prediction1 - Australia, prediction2 - China, etc.
+
 ## 🔧 Usage
 Run the prediction script:
 ```bash
