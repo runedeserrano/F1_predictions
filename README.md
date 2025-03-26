@@ -37,7 +37,7 @@ This repository contains a **Gradient Boosting Machine Learning model** that pre
 ## 🔧 Usage
 Run the prediction script:
 ```bash
-python prediction.py
+python3 prediction1.py
 ```
 Expected output:
 ```
