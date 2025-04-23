@@ -8,10 +8,9 @@ from sklearn.metrics import mean_absolute_error
 # Enable FastF1 caching
 fastf1.Cache.enable_cache("f1_cache")
 
-# Load FastF1 2024 Australian GP race session
-session_2024 = fastf1.get_session(2024, 3, "R")
+# Load FastF1 2024 Saudi Arabia GP race session
+session_2024 = fastf1.get_session(2024, 2, "R")
 session_2024.load()
-
 # Extract lap times
 laps_2024 = session_2024.laps[["Driver", "LapTime"]].copy()
 laps_2024.dropna(subset=["LapTime"], inplace=True)
@@ -19,17 +18,19 @@ laps_2024["LapTime (s)"] = laps_2024["LapTime"].dt.total_seconds()
 
 # 2025 Qualifying Data
 qualifying_2025 = pd.DataFrame({
-    "Driver": ["Lando Norris", "Oscar Piastri", "Max Verstappen", "George Russell", "Yuki Tsunoda",
-               "Alexander Albon", "Charles Leclerc", "Lewis Hamilton", "Pierre Gasly", "Carlos Sainz", "Fernando Alonso", "Lance Stroll"],
-    "QualifyingTime (s)": [75.096, 75.180, 75.481, 75.546, 75.670,
-                           75.737, 75.755, 75.973, 75.980, 76.062, 76.4, 76.5]
+    "Driver": ["Max Verstappen", "Oscar Piastri", "George Russell", "Charles Leclerc", "Carlos Sainz",
+               "Lewis Hamilton", "Yuki Tsunoda", "Pierre Gasly", "Lando Norris", "Alexander Albon",
+               "Fernando Alonso", "Lance Stroll"],
+    "QualifyingTime (s)": [87.294, 87.304, 87.407, 87.670, 88.164,
+                           88.201, 88.204, 88.367, 87.481, 88.109,
+                           88.303, 88.645]
 })
 
 # Map full names to FastF1 3-letter codes
 driver_mapping = {
-    "Lando Norris": "NOR", "Oscar Piastri": "PIA", "Max Verstappen": "VER", "George Russell": "RUS",
-    "Yuki Tsunoda": "TSU", "Alexander Albon": "ALB", "Charles Leclerc": "LEC", "Lewis Hamilton": "HAM",
-    "Pierre Gasly": "GAS", "Carlos Sainz": "SAI", "Lance Stroll": "STR", "Fernando Alonso": "ALO"
+    "Max Verstappen": "VER", "Oscar Piastri": "PIA", "George Russell": "RUS", "Charles Leclerc": "LEC",
+    "Carlos Sainz": "SAI", "Lewis Hamilton": "HAM", "Yuki Tsunoda": "TSU",
+    "Pierre Gasly": "GAS", "Lando Norris": "NOR", "Alexander Albon": "ALB", "Fernando Alonso": "ALO", "Lance Stroll": "STR"
 }
 
 qualifying_2025["DriverCode"] = qualifying_2025["Driver"].map(driver_mapping)
@@ -57,7 +58,7 @@ qualifying_2025["PredictedRaceTime (s)"] = predicted_lap_times
 qualifying_2025 = qualifying_2025.sort_values(by="PredictedRaceTime (s)")
 
 # Print final predictions
-print("\n🏁 Predicted 2025 Chinese GP Winner 🏁\n")
+print("\n🏁 Predicted 2025 Saudi Arabia GP Winner 🏁\n")
 print(qualifying_2025[["Driver", "PredictedRaceTime (s)"]])
 
 # Evaluate Model
