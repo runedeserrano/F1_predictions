@@ -9,32 +9,41 @@ from sklearn.metrics import mean_absolute_error
 fastf1.Cache.enable_cache("f1_cache")
 
 # Load 2024 Saudi Arabia GP race session
-session_2024 = fastf1.get_session(2024, 2, "R")
+session_2024 = fastf1.get_session(2024, 6, "R")
 session_2024.load()
+last_session = fastf1.get_session(2025, 6, "Q")
+last_session.load()
 
 # Extract lap and sector times
 laps_2024 = session_2024.laps[["Driver", "LapTime"]].copy()
 laps_2024.dropna(subset=["LapTime"], inplace=True)
 laps_2024["LapTime (s)"] = laps_2024["LapTime"].dt.total_seconds()
 
+# TODO
+# quali_2025 = last_session.laps[["Driver", "Time"]].copy()
+# quali_2025.dropna(subset=["Time"], inplace=True)
+# quali_2025["LapTime (s)"] = quali_2025["Time"].dt.total_seconds()
+
+# print(quali_2025)
+
 # 2025 Qualifying Data Saudi Arabia GP
 qualifying_2025 = pd.DataFrame({
-    "Driver": ["Max Verstappen", "Oscar Piastri", "George Russell", "Charles Leclerc", "Andrea Kimi Antonelli",
-               "Carlos Sainz", "Lewis Hamilton", "Yuki Tsunoda", "Pierre Gasly", "Lando Norris",
-               "Alexander Albon", "Liam Lawson", "Fernando Alonso", "Isack Hadjar", "Oliver Bearman",
-               "Lance Stroll", "Jack Doohan", "Nico Hülkenberg", "Esteban Ocon", "Gabriel Bortoleto"],
-    "QualifyingTime (s)": [87.294, 87.304, 87.407, 87.670, 87.866,
-                           88.164, 88.201, 88.204, 88.367, 87.481,
-                           88.109, 88.191, 88.303, 88.418, 88.648,
-                           88.645, 88.739, 88.782, 89.092, 89.462]
+    "Driver": ["Max Verstappen", "Lando Norris", "Andrea Kimi Antonelli", "Oscar Piastri", "George Russell",
+               "Carlos Sainz", "Alexander Albon", "Charles Leclerc", "Esteban Ocon", "Yuki Tsunoda",
+               "Isack Hadjar", "Lewis Hamilton", "Gabriel Bortoleto", "Jack Doohan", "Liam Lawson",
+               "Nico Hülkenberg", "Fernando Alonso", "Pierre Gasly", "Lance Stroll", "Oliver Bearman"],
+    "QualifyingTime (s)": [86.204, 86.269, 86.271, 86.375, 86.385,
+                           86.569, 86.682, 86.754, 86.824, 86.943,
+                           86.987, 87.006, 87.151, 87.186, 87.363,
+                           87.473, 87.604, 87.710, 87.830, 87.999]
 })
 
 # Map full names to FastF1 3-letter codes
 driver_mapping = {
-    "Max Verstappen": "VER", "Oscar Piastri": "PIA", "George Russell": "RUS", "Charles Leclerc": "LEC", "Andrea Kimi Antonelli": "ANT",
-    "Carlos Sainz": "SAI", "Lewis Hamilton": "HAM", "Yuki Tsunoda": "TSU", "Pierre Gasly": "GAS", "Lando Norris": "NOR",
-    "Alexander Albon": "ALB", "Liam Lawson": "LAW", "Fernando Alonso": "ALO", "Isack Hadjar": "HAD", "Oliver Bearman": "BEA",
-    "Lance Stroll": "STR", "Jack Doohan": "DOO", "Nico Hülkenberg": "HUL", "Esteban Ocon": "OCO", "Gabriel Bortoleto": "BOR"
+    "Max Verstappen": "VER", "Lando Norris": "NOR", "Andrea Kimi Antonelli": "ANT", "Oscar Piastri": "PIA", "George Russell": "RUS",
+    "Carlos Sainz": "SAI", "Alexander Albon": "ALB", "Charles Leclerc": "LEC", "Esteban Ocon": "OCO", "Yuki Tsunoda": "TSU",
+    "Isack Hadjar": "HAD", "Lewis Hamilton": "HAM", "Gabriel Bortoleto": "BOR", "Jack Doohan": "DOO", "Liam Lawson": "LAW",
+    "Nico Hülkenberg": "HUL", "Fernando Alonso": "ALO", "Pierre Gasly": "GAS", "Lance Stroll": "STR", "Oliver Bearman": "BEA"
 }
 
 qualifying_2025["DriverCode"] = qualifying_2025["Driver"].map(driver_mapping)

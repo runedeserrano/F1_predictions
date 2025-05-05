@@ -18,19 +18,19 @@ laps_2024["LapTime (s)"] = laps_2024["LapTime"].dt.total_seconds()
 
 # 2025 Qualifying Data
 qualifying_2025 = pd.DataFrame({
-    "Driver": ["Max Verstappen", "Oscar Piastri", "George Russell", "Charles Leclerc", "Carlos Sainz",
-               "Lewis Hamilton", "Yuki Tsunoda", "Pierre Gasly", "Lando Norris", "Alexander Albon",
-               "Fernando Alonso", "Lance Stroll"],
-    "QualifyingTime (s)": [87.294, 87.304, 87.407, 87.670, 88.164,
-                           88.201, 88.204, 88.367, 87.481, 88.109,
-                           88.303, 88.645]
+    "Driver": ["Max Verstappen", "Lando Norris", "Oscar Piastri", "George Russell",
+               "Carlos Sainz", "Alexander Albon", "Charles Leclerc", "Yuki Tsunoda",
+               "Lewis Hamilton", "Fernando Alonso", "Pierre Gasly", "Lance Stroll"],
+    "QualifyingTime (s)": [86.204, 86.269, 86.375, 86.385,
+                           86.569, 86.682, 86.754, 86.943,
+                           87.006, 87.604, 87.710, 87.830]
 })
 
 # Map full names to FastF1 3-letter codes
 driver_mapping = {
-    "Max Verstappen": "VER", "Oscar Piastri": "PIA", "George Russell": "RUS", "Charles Leclerc": "LEC",
-    "Carlos Sainz": "SAI", "Lewis Hamilton": "HAM", "Yuki Tsunoda": "TSU",
-    "Pierre Gasly": "GAS", "Lando Norris": "NOR", "Alexander Albon": "ALB", "Fernando Alonso": "ALO", "Lance Stroll": "STR"
+    "Max Verstappen": "VER", "Lando Norris": "NOR", "Oscar Piastri": "PIA", "George Russell": "RUS",
+    "Carlos Sainz": "SAI", "Alexander Albon": "ALB", "Charles Leclerc": "LEC", "Yuki Tsunoda": "TSU",
+    "Lewis Hamilton": "HAM", "Fernando Alonso": "ALO", "Pierre Gasly": "GAS", "Lance Stroll": "STR"
 }
 
 qualifying_2025["DriverCode"] = qualifying_2025["Driver"].map(driver_mapping)
