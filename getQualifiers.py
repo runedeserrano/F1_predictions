@@ -1,7 +1,7 @@
 import fastf1
 import pandas as pd
 
-def get_full_qualifying_results(year, gp_name):
+def get_quali_results(year, gp_name):
     fastf1.Cache.enable_cache("f1_cache")
     
     # Load session
@@ -60,7 +60,3 @@ def get_full_qualifying_results(year, gp_name):
     full_results.index.name = 'Position'
 
     return full_results
-
-# Usage example
-full_results = get_full_qualifying_results(2025, 'Miami')
-print(full_results)
