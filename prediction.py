@@ -8,7 +8,7 @@ import getQualifiers
 
 # Enable FastF1 caching
 fastf1.Cache.enable_cache("f1_cache")
-race_name = "Miami"
+race_name = "Monaco"
 
 # Load 2024 race session
 session_2024 = fastf1.get_session(2024, race_name, "R")
